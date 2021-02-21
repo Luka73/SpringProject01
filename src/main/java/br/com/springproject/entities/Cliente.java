@@ -1,17 +1,17 @@
 package br.com.springproject.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Cliente implements Serializable, Comparable<Cliente> {
 
-    private static final long serialVersionUID = -3977659307748755288L;
+    private static final long serialVersionUID = -6473902029327085888L;
 
     private Integer idCliente;
     private String nome;
     private String email;
 
-    public Cliente(){
-
+    public Cliente() {
     }
 
     public Cliente(Integer idCliente, String nome, String email) {
@@ -45,7 +45,37 @@ public class Cliente implements Serializable, Comparable<Cliente> {
     }
 
     @Override
-    public int compareTo(Cliente o) {
-        return this.idCliente.compareTo(o.getIdCliente());
+    public String toString() {
+        return "Cliente [idCliente=" + idCliente + ", nome=" + nome + ", email=" + email + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((idCliente == null) ? 0 : idCliente.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cliente other = (Cliente) obj;
+        if (idCliente == null) {
+            if (other.idCliente != null)
+                return false;
+        } else if (!idCliente.equals(other.idCliente))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int compareTo(Cliente cliente) {
+        return this.idCliente.compareTo(cliente.getIdCliente());
     }
 }

@@ -17,6 +17,11 @@
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="bintray" />
+      <option name="url" value="https://jcenter.bintray.com" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="springsource-milestones" />
       <option name="name" value="SpringSource Milestones Proxy" />
       <option name="url" value="https://oss.sonatype.org/content/repositories/springsource-milestones" />

@@ -34,7 +34,7 @@ public class ClienteRepository implements IClienteRepository {
 
     @Override
     public void delete(Integer id) throws Exception {
-        String query = "delete from where idcliente = ?";
+        String query = "delete from cliente where idcliente = ?";
         Object[] params = { id };
 
         jdbcTemplate.update(query, params);
@@ -55,7 +55,7 @@ public class ClienteRepository implements IClienteRepository {
 
     @Override
     public Cliente findById(Integer id) throws Exception {
-        String query = "select * from cliente order by nome";
+        String query = "select * from cliente where idcliente=?";
         Object[] params = { id };
 
         return jdbcTemplate.queryForObject(query, params, new RowMapper<Cliente>() {
@@ -64,6 +64,26 @@ public class ClienteRepository implements IClienteRepository {
                 return getCliente(rs);
             }
         });
+
+    }
+
+    @Override
+    public Cliente findByEmail(String email) throws Exception {
+        String query = "select * from cliente where email = ?";
+        Object[] params = { email };
+
+        List<Cliente> result = jdbcTemplate.query(query, params, new RowMapper<Cliente>() {
+
+            @Override
+            public Cliente mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return getCliente(rs);
+            }
+        });
+
+        if(result != null && result.size() > 0)
+            return result.get(0);
+
+        return null;
     }
 
     private Cliente getCliente(ResultSet rs) throws SQLException {
